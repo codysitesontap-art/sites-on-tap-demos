@@ -27,3 +27,26 @@ body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;opac
 @media(max-width:940px){.nav-links>a:not(.btn){display:none}.hero{grid-template-columns:1fr;gap:40px;padding-top:64px;min-height:auto}.hero-art{min-height:480px;max-width:620px;width:100%}.section-head{align-items:start;flex-direction:column}.service-grid{grid-template-columns:repeat(2,1fr)}.about-grid,.faq{grid-template-columns:1fr}.process{grid-template-columns:1fr}.step{min-height:auto}.cta-card{align-items:flex-start;flex-direction:column}.trust{grid-template-columns:1fr 1fr 1fr}}
 @media(max-width:620px){body{padding-bottom:72px}.concept{font-size:9px;padding:8px 10px;letter-spacing:.09em}.nav-wrap{padding:9px 10px 0}.nav{min-height:58px;padding:8px 9px 8px 13px;border-radius:17px}.brand-mark{width:34px;height:34px;border-radius:11px}.brand-name{font-size:12px;max-width:170px}.brand-sub{font-size:8px}.nav .btn{min-height:40px;padding:0 12px;font-size:11px}.hero{padding:52px 17px 66px;gap:34px}.hero h1{font-size:clamp(44px,14vw,65px);margin-top:15px}.hero p{font-size:15px}.hero-actions{display:grid;grid-template-columns:1fr 1fr}.hero-actions .btn{width:100%}.micro-trust{font-size:10px}.hero-art{min-height:405px}.art-card{inset:10px 0 0 0;border-radius:27px}.art-inner{padding:25px}.art-copy strong{font-size:40px}.art-copy span{font-size:11px}.floating-services{left:10px;right:10px;bottom:-15px;gap:6px}.float-card{min-height:78px;padding:11px;border-radius:14px}.float-card i{width:25px;height:25px;font-size:9px}.float-card b{font-size:9px;margin-top:7px}.trust-wrap{padding:0 14px}.trust{grid-template-columns:1fr;border-radius:19px}.metric{padding:18px 20px}.metric+.metric{border-left:0;border-top:1px solid var(--line)}.metric strong{font-size:19px}.section{padding:78px 17px}.section h2{font-size:39px}.service-grid{grid-template-columns:1fr}.service-card{min-height:210px}.dark-section .section{padding-top:80px;padding-bottom:80px}.about-panel,.contact-panel{padding:25px;border-radius:22px}.contact-panel h3{font-size:29px}.faq{gap:28px}.cta{padding:0 14px;margin-bottom:45px}.cta-card{padding:30px 23px;border-radius:24px}.cta-actions{width:100%;display:grid;grid-template-columns:1fr 1fr}.cta-actions .btn{width:100%;padding:0 11px}.footer{padding-bottom:26px}.mobile-dock{position:fixed;z-index:40;left:10px;right:10px;bottom:max(10px,env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:7px;border-radius:18px;background:color-mix(in srgb,var(--bg) 88%,transparent);border:1px solid var(--line);box-shadow:0 18px 45px rgba(0,0,0,.2);backdrop-filter:blur(18px)}.mobile-dock .btn{min-height:48px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.btn{transition:none}}
+/* Mobile/contrast QA fixes */
+.theme-dark{color:#f4fbff}
+.theme-dark .nav{background:rgba(6,19,27,.88);border-color:rgba(164,241,255,.16)}
+.theme-dark .brand-name,.theme-dark .service-card h3,.theme-dark .metric strong,.theme-dark .faq-item b,.theme-dark .footer strong,.theme-dark h1,.theme-dark h2{color:#f4fbff}
+.theme-dark .brand-sub,.theme-dark .hero p,.theme-dark .lead,.theme-dark .service-card p,.theme-dark .metric span,.theme-dark .faq-item p,.theme-dark .micro-trust,.theme-dark .footer{color:#a9c5ce}
+.theme-dark .btn.alt{background:rgba(255,255,255,.08);color:#f4fbff;border-color:rgba(164,241,255,.24)}
+.theme-dark .btn.alt svg{color:#4de3ff}
+.theme-dark .service-card,.theme-dark .about-panel,.theme-dark .trust{background:rgba(255,255,255,.045);border-color:#214b59}
+.theme-dark .float-card{background:rgba(6,19,27,.90);color:#f4fbff;border-color:#214b59}
+.theme-dark .contact-panel,.theme-dark .contact-panel a{color:var(--ctaInk)}
+.theme-dark .cta-card .btn.alt{background:rgba(0,20,27,.88);color:#fff;border-color:rgba(255,255,255,.12)}
+#services,#about,#contact,.faq{scroll-margin-top:100px}
+@media(max-width:620px){
+  body{padding-bottom:0}
+  .mobile-dock{display:none!important}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  #about{padding-bottom:44px}
+  .faq{padding-top:44px}
+  .service-card{min-height:0}
+  .hero-art{margin-bottom:10px}
+  .floating-services{bottom:0}
+  .footer{padding-bottom:34px}
+}
