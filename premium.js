@@ -15,33 +15,48 @@
     <circle r="8" class="hub"/>
   </g>`;
 
+  const alphaCarPath='M112 302C119 272 137 246 169 231C207 214 260 207 325 198C356 161 395 130 443 113C492 96 548 96 600 111C642 123 678 145 711 177C773 184 826 198 867 219C902 237 923 260 931 286L913 312H126C119 309 115 306 112 302Z';
+  const alphaGlassPath='M350 194C382 157 416 132 456 118C500 103 548 104 592 116C630 127 663 146 694 178L653 184L363 184Z';
+  const alphaWheel=(x,clean=true)=>`<g class="wheel wheel-${clean?'clean':'dirty'}" transform="translate(${x} 316)">
+    <circle r="61" class="tire"/>
+    <circle r="46" class="rim-outer"/>
+    <circle r="32" class="rim-inner"/>
+    <circle r="23" fill="none" stroke="rgba(185,198,203,.34)" stroke-width="2"/>
+    <g class="spokes">${[0,36,72,108,144].map(a=>`<path d="M-30 0H30" transform="rotate(${a})"/>`).join('')}</g>
+    <circle r="8" class="hub"/>
+  </g>`;
+
   function alphaSvg(clean=false){
     const s=clean?'aClean':'aHaze';
     return `<svg viewBox="0 0 1000 430" role="img" aria-label="${clean?'Corrected glossy automotive finish':'Hazy automotive paint with visible swirl marks'}">
       <defs>
-        <linearGradient id="${s}Body" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id="${s}Body" x1=".08" y1="0" x2=".92" y2="1">
           ${clean
-            ?'<stop offset="0" stop-color="#05090c"/><stop offset=".18" stop-color="#151c20"/><stop offset=".38" stop-color="#52636a"/><stop offset=".46" stop-color="#eef8f8"/><stop offset=".52" stop-color="#546a72"/><stop offset=".7" stop-color="#111b20"/><stop offset="1" stop-color="#020608"/>'
-            :'<stop offset="0" stop-color="#171a1b"/><stop offset=".34" stop-color="#343b3d"/><stop offset=".55" stop-color="#677073"/><stop offset=".72" stop-color="#2a3133"/><stop offset="1" stop-color="#101314"/>'}
+            ?'<stop offset="0" stop-color="#030608"/><stop offset=".16" stop-color="#10181c"/><stop offset=".34" stop-color="#39484e"/><stop offset=".445" stop-color="#b9c8cc"/><stop offset=".485" stop-color="#f5fbfc"/><stop offset=".535" stop-color="#65767c"/><stop offset=".69" stop-color="#172126"/><stop offset=".86" stop-color="#080d10"/><stop offset="1" stop-color="#020405"/>'
+            :'<stop offset="0" stop-color="#121617"/><stop offset=".22" stop-color="#252c2e"/><stop offset=".42" stop-color="#4c5659"/><stop offset=".51" stop-color="#747d80"/><stop offset=".62" stop-color="#3a4244"/><stop offset=".82" stop-color="#202628"/><stop offset="1" stop-color="#0d1112"/>'}
         </linearGradient>
-        <linearGradient id="${s}Glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${clean?'#cfe6ea':'#6f7d80'}" stop-opacity="${clean?'.72':'.45'}"/><stop offset="1" stop-color="#121b1f" stop-opacity=".92"/></linearGradient>
-        <radialGradient id="${s}Lamp"><stop stop-color="#fff"/><stop offset=".45" stop-color="#d7f7ff"/><stop offset="1" stop-color="#7bb9c7"/></radialGradient>
+        <linearGradient id="${s}Glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${clean?'#d8edf0':'#7a878a'}" stop-opacity="${clean?'.78':'.48'}"/><stop offset=".42" stop-color="${clean?'#566e75':'#455154'}" stop-opacity=".7"/><stop offset="1" stop-color="#0b1216" stop-opacity=".96"/></linearGradient>
+        <linearGradient id="${s}Blade" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ffffff" stop-opacity="0"/><stop offset=".45" stop-color="#f7ffff" stop-opacity="${clean?'.72':'.24'}"/><stop offset=".62" stop-color="#ccebf0" stop-opacity="${clean?'.35':'.12'}"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+        <radialGradient id="${s}Lamp"><stop stop-color="#fff"/><stop offset=".42" stop-color="#e8fbff"/><stop offset="1" stop-color="#82b8c4"/></radialGradient>
       </defs>
-      <ellipse cx="502" cy="363" rx="372" ry="29" class="car-shadow"/>
-      <path d="${carPath}" fill="url(#${s}Body)" class="car-body"/>
-      <path d="${glassPath}" fill="url(#${s}Glass)" class="car-glass"/>
-      <path d="M482 93v69M648 104l-6 58" class="glass-seams"/>
-      <path d="M305 215c124-43 333-45 505-4M367 252c111 17 310 18 447-6M157 284c113 5 226 2 334-9" class="body-contours"/>
-      <path d="M781 200l77 25-15 35-62-8z" fill="url(#${s}Lamp)" class="headlamp"/>
-      <path d="M176 273l43-5" class="rear-lamp"/>
-      <path d="M470 163l-10 123M649 165l16 126" class="panel-seams"/>
-      <path d="M746 168l30 9-19 22-28-2z" class="mirror"/>
-      ${wheel(301,clean)}${wheel(733,clean)}
-      ${clean?`<g class="clean-highlights"><path d="M208 260c116-36 220-53 338-61 116-8 221-1 302 22"/><path d="M454 102c75-12 142-7 196 7"/><path d="M337 276c154 24 320 17 443-2"/></g>`:`<g class="paint-defects">
-        <path d="M221 205c28-24 64-14 72 11s-20 48-49 42-35-33-16-47 46-12 55 8"/>
-        <path d="M363 186c22-19 53-9 60 13 6 22-17 40-40 32-22-8-25-31-8-42 17-11 38-7 48 6"/>
-        <path d="M520 221c31-22 68-8 70 20 2 26-32 42-58 27-22-13-18-38 4-49 21-10 43-5 55 11"/>
-        <path d="M281 248l72-21M615 181l88-15M659 242l95-17M440 264l57-11" class="scratches"/>
+      <ellipse cx="507" cy="367" rx="382" ry="24" class="car-shadow"/>
+      <path d="${alphaCarPath}" fill="url(#${s}Body)" class="car-body"/>
+      <path d="M135 295C276 279 422 274 561 278C703 282 821 280 910 293L899 310H137Z" fill="rgba(0,0,0,.26)"/>
+      <path d="${alphaGlassPath}" fill="url(#${s}Glass)" class="car-glass"/>
+      <path d="M456 118L442 184M592 116L611 183M522 106L524 184" class="glass-seams"/>
+      <path d="M164 238C286 213 437 196 578 195C710 194 818 207 884 232M178 257C323 245 490 244 654 249C752 252 826 251 889 244M153 286C303 281 454 282 607 287C734 291 824 291 901 285" class="body-contours"/>
+      <path d="M802 214C837 218 866 228 888 243L873 258L810 252Z" fill="url(#${s}Lamp)" class="headlamp"/>
+      <path d="M146 257L198 249" class="rear-lamp"/>
+      <path d="M443 184L430 292M612 183L626 294M706 180C724 211 733 248 735 292M796 207C824 205 849 209 872 221" class="panel-seams"/>
+      <path d="M690 176L726 183L706 202L675 198Z" class="mirror"/>
+      <path d="M224 223C345 203 492 191 628 196C729 200 810 209 866 226" fill="none" stroke="url(#${s}Blade)" stroke-width="7" stroke-linecap="round" opacity="${clean?'.88':'.36'}"/>
+      <path d="M355 189C386 151 421 128 458 116C503 101 550 102 591 114" fill="none" stroke="rgba(247,255,255,${clean?'.68':'.21'})" stroke-width="3" stroke-linecap="round"/>
+      ${alphaWheel(291,clean)}${alphaWheel(748,clean)}
+      ${clean?`<g class="clean-highlights"><path d="M183 250C309 225 459 213 603 216C717 218 810 229 876 246"/><path d="M376 176C422 123 487 104 549 108C604 111 651 133 689 174"/><path d="M211 281C358 268 513 270 661 279C751 284 825 282 882 276"/></g>`:`<g class="paint-defects">
+        <path d="M224 222c28-24 64-14 72 11s-20 48-49 42-35-33-16-47 46-12 55 8"/>
+        <path d="M379 205c22-19 53-9 60 13 6 22-17 40-40 32-22-8-25-31-8-42 17-11 38-7 48 6"/>
+        <path d="M557 226c31-22 68-8 70 20 2 26-32 42-58 27-22-13-18-38 4-49 21-10 43-5 55 11"/>
+        <path d="M260 259l75-19M625 205l90-10M675 258l98-11M453 278l62-8" class="scratches"/>
       </g>`}
     </svg>`;
   }
